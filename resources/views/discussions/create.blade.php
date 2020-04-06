@@ -4,7 +4,7 @@
 <div class="card">
   <div class="card-header"> Add Discussion</div>
   <div class="card-body">
-    <form action="{{ route('discussion.store') }}" method="POST">
+    <form action="{{ route('discussions.store') }}" method="POST">
       @csrf
       <div class="form-group">
         <label for="title">Title</label>
@@ -32,7 +32,7 @@
           @endforeach
         </select>
       </div>
-      <button type="submit" class="btn btn-success btn-sm">Create Discussion</button>
+      <button type="submit" class="btn btn-success">Create Discussion</button>
     </form>
   </div>
 </div>

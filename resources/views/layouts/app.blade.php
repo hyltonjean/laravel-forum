@@ -74,33 +74,41 @@
       </div>
     </nav>
 
-    @auth
-
 
     <div class="row d-flex justify-content-end mt-4 mr-4">
       @include('partials.success')
     </div>
+    @if(!in_array(request()->path(), ['login', 'register', 'password/email', 'password/reset']))
     <main class="py-4">
       <div class="container">
         <div class="row d-flex justify-content-end">
           <div class="col-md-3">
-            <ul class="list-group">
-              @foreach($channels as $channel)
-              <li class="list-group-item">
-                <a type="button" href="#">{{ $channel->name }}</a>
-              </li>
-              @endforeach
-            </ul>
+            <div class="mb-1">
+              @auth
+              <a type="button" href="{{ route('discussions.create') }}" style="width:100%;"
+                class="btn btn-info text-white">Add
+                Discussion</a>
+              @else
+              <a type="button" href="{{ route('login') }}" style="width:100%;" class="btn btn-info text-white">Sign in
+                to add a discussion</a>
+              @endauth
+            </div>
+
+            @include('partials.channel-header')
+
           </div>
           <div class="col-md-9">
             @yield('content')
           </div>
         </div>
-        @else
-        @yield('content')
-        @endauth
       </div>
     </main>
+
+    @else
+    <div class="py-4">
+      @yield('content')
+    </div>
+    @endif
   </div>
 
   <!-- Scripts -->

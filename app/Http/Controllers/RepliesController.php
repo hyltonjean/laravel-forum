@@ -2,13 +2,11 @@
 
 namespace LaravelForum\Http\Controllers;
 
-use LaravelForum\Reply;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use LaravelForum\Discussion;
-use LaravelForum\Http\Requests\CreateDiscussionsRequest;
+use LaravelForum\Http\Requests\CreateReplyRequest;
 
-class DiscussionsController extends Controller
+class RepliesController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -17,7 +15,7 @@ class DiscussionsController extends Controller
    */
   public function index()
   {
-    return view('discussions.index')->with('discussions', Discussion::paginate(5));
+    //
   }
 
   /**
@@ -27,7 +25,7 @@ class DiscussionsController extends Controller
    */
   public function create()
   {
-    return view('discussions.create');
+    //
   }
 
   /**
@@ -36,20 +34,16 @@ class DiscussionsController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(CreateDiscussionsRequest $request)
+  public function store(CreateReplyRequest $request, Discussion $discussion)
   {
-
-    auth()->user()->discussions()->create([
-      'title' => $request->title,
+    auth()->user()->replies()->create([
       'content' => $request->content,
-      'slug' => Str::slug($request->title),
-      'channel_id' => $request->channel_id
+      'discussion_id' => $discussion->id,
     ]);
 
-    session()->flash('success', 'Discussion created successfully');
+    session()->flash('success', 'You successfully replied to the discussion');
 
-    return redirect(route('discussions
-    .index'));
+    return redirect()->back();
   }
 
   /**
@@ -58,9 +52,9 @@ class DiscussionsController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show(Discussion $discussion)
+  public function show($id)
   {
-    return view('discussions.show')->with('discussion', $discussion);
+    //
   }
 
   /**
@@ -95,14 +89,5 @@ class DiscussionsController extends Controller
   public function destroy($id)
   {
     //
-  }
-
-  public function reply(Discussion $discussion, Reply $reply)
-  {
-    $discussion->markAsBestReply($reply);
-
-    session()->flash('success' . 'Marked as best reply');
-
-    return redirect()->back();
   }
 }
