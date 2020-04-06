@@ -16,9 +16,8 @@
       </div>
 
       <div class="form-group">
-        <label for="content">Content</label>
-        <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content" rows="6"
-          cols="6" placeholder="Content"></textarea>
+        <input id="content" type="hidden" name="content">
+        <trix-editor input="content"></trix-editor>
         @error('content')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -37,4 +36,12 @@
     </form>
   </div>
 </div>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
 @endsection
