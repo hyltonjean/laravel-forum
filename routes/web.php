@@ -15,7 +15,7 @@ use LaravelForum\Http\Controllers\UsersController;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
   return view('welcome');

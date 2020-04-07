@@ -10,6 +10,12 @@ use LaravelForum\Http\Requests\CreateDiscussionsRequest;
 
 class DiscussionsController extends Controller
 {
+
+  public function __construct()
+  {
+    return $this->middleware(['auth', 'verified'])->only(['create', 'store']);
+  }
+
   /**
    * Display a listing of the resource.
    *

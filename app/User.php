@@ -5,10 +5,11 @@ namespace LaravelForum;
 use LaravelForum\Reply;
 use LaravelForum\Discussion;
 use Illuminate\Notifications\Notifiable;
+use LaravelForum\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
   use Notifiable;
 
@@ -38,6 +39,11 @@ class User extends Authenticatable
   protected $casts = [
     'email_verified_at' => 'datetime',
   ];
+
+  public function sendEmailVerificationNotification()
+  {
+    $this->notify(new VerifyEmail());
+  }
 
   public function discussions()
   {
