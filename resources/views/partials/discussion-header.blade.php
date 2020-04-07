@@ -4,7 +4,6 @@
   <span class="ml-2" style="font-weight: bold;">{{ $discussion->author->name }}</span>
   @if(in_array(request()->path(), ['discussions']))
   <a type="button" href="{{ route('discussions.show', $discussion->slug) }}"
-    class="btn btn-info btn-sm text-white float-right">View &nbsp;<span class="badge badge-light"
-      style="font-size:13px;">{{ $discussion->replies->count() }}</span></a>
+    class="btn btn-success btn-sm float-right">View</a>
   @endif
 </div>

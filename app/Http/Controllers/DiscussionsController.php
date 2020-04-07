@@ -17,7 +17,7 @@ class DiscussionsController extends Controller
    */
   public function index()
   {
-    return view('discussions.index')->with('discussions', Discussion::paginate(5));
+    return view('discussions.index')->with('discussions', Discussion::filterByChannels()->paginate(4));
   }
 
   /**
