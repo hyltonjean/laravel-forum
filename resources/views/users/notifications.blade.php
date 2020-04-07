@@ -7,14 +7,23 @@
   <div class="card-body">
     <ul class="list-group">
       @foreach ($notifications as $notification)
-      <li class="list-group-item">
-        @if ($notification->type === 'LaravelForum\Notifications\NewReplyAdded')
+      @if ($notification->type === 'LaravelForum\Notifications\NewReplyAdded')
+      <li class="list-group-item py-5 bg-light">
         A new reply was added to your discussion:
         <strong>{{ $notification->data['discussion']['title'] }}</strong>
         <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}"
           class="btn btn-sm btn-info text-white float-right">View discussion</a>
-        @endif
       </li>
+      @endif
+
+      @if ($notification->type === 'LaravelForum\Notifications\ReplyMarkAsBestReply')
+      <li class="list-group-item py-5 bg-light">
+        Your reply to the discussion <strong>{{ $notification->data['discussion']['title'] }}</strong> was marked as
+        best reply.
+        <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}"
+          class="btn btn-sm btn-info text-white float-right">View discussion</a>
+      </li>
+      @endif
       @endforeach
     </ul>
   </div>

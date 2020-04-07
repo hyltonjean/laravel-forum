@@ -45,6 +45,7 @@
         <span class="ml-2" style="font-weight: bold;">{{ $reply->owner->name }}</span>
       </div>
       <div class="float-right">
+        @auth
         @if(auth()->user()->id === $discussion->user_id)
         <form action="{{ route('discussions.best-reply', ['discussion' => $discussion->slug, 'reply' => $reply->id]) }}"
           method="POST">
@@ -52,6 +53,7 @@
           <button type="submit" class="btn btn-primary btn-sm text-right">Mark as best reply</button>
         </form>
         @endif
+        @endauth
       </div>
     </div>
   </div>

@@ -34,19 +34,24 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left Side Of Navbar -->
-          @auth
           <ul class="navbar-nav mr-auto">
+            @auth
             <li class="nav-item">
-              <a href="{{ route('users.notifications') }}" class="nav-link badge badge-info text-white">
-                <span>{{ auth()->user()->unreadNotifications->count() }}
-                  Unread
-                  notifications
+
+              <a href="{{ route('users.notifications') }}" class="nav-link">
+                <span class="badge badge-info text-white py-2">
+                  {{ auth()->user()->unreadNotifications->count() }}
+                  Unread notifications
                 </span>
               </a>
             </li>
             @endauth
+            <li class="nav-item">
+              <a href="{{ route('discussions.index') }}" class="nav-link">
+                Discussions
+              </a>
+            </li>
           </ul>
-
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
